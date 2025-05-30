@@ -25,9 +25,10 @@ function App() {
     setTimeout(() => playSequence([first]), 500);
   };
 
-  // Muestra la secuencia al usuario
+  // Muestra la secuencia al usuario, encendiendo tantos botones como el nivel
   const playSequence = (seq: number[]) => {
     let i = 0;
+    setActiveIndex(null);
     const interval = setInterval(() => {
       setActiveIndex(seq[i]);
       setTimeout(() => setActiveIndex(null), 400);
@@ -79,11 +80,10 @@ function App() {
         {COLORS.map((color, idx) => (
           <button
             key={color}
-            className={`simon-btn ${color} ${
-              activeIndex === idx ? "active" : ""
-            }`}
+            className={`simon-btn ${color} ${activeIndex === idx ? 'active show' : ''}`}
             onClick={() => handleUserClick(idx)}
             disabled={!isPlaying || activeIndex !== null}
+            style={activeIndex === idx ? { filter: 'brightness(2) drop-shadow(0 0 20px #fff)', border: '3px solid #222' } : {}}
           />
         ))}
       </div>
